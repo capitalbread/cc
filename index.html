@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HOME - Capital</title>
+  <meta name="title" content="Bread Today - CAPITAL Tomorrow">
+  <meta name="description" content="CAPITAL is all about flipping the script. From Earning Bread to Living Big.">
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Work+Sans:wght@400;500;700&display=swap"rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body id="top" style="overflow-x: hidden;">
+
+  <header class="header" data-header">
+    <div class="header-top">
+      <div class="container">
+
+        <a href="index.html" class="logo">
+          <img src="./assets/images/logo.svg" width="50" height="auto" alt="Logo home">
+        </a>
+
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search our store" class="input-field">
+
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+          <div class="header-action">
+            <button class="header-action-btn cart-btn" aria-label="cart" title="Cart" id="cart-btn">
+              <span class="span">0</span>
+              <ion-icon name="cart" aria-hidden="true"></ion-icon>
+            </button>
+ 
+          <button class="nav-open-btn" aria-label="open menu" title="Open Menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="header-bottom" data-navbar>
+      <div class="container">
+        
+        <nav class="navbar">
+
+          <button class="nav-close-btn" data-nav-toggler aria-label="close menu" title="Close Menu">
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <div class="navbar-top">
+            <input type="search" name="search" placeholder="Search our store" class="input-field">
+            <button class="search-btn" aria-label="Search">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+
+          <ul class="navbar-list">
+            <li><a href="index.html" class="navbar-link">Home</a></li>
+            <li><a href="cards.html" class="navbar-link">Store</a></li>
+            <li><a href="escrow.html" class="navbar-link">Escrow</a></li>
+            <li><a href="cart.html" class="navbar-link">Your Bag</a></li>
+            <li><a href="contact.html" class="navbar-link">Support</a></li>
+          </ul>
+          
+        </nav>
+      </div>
+    </div>
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </header>
+
+
+  
+
+  <main>
+    <article>
+
+      
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="section hero has-bg-image" aria-label="home"
+        style="background-image: url('./assets/images/section-bg.jpg'); overflow-x: hidden">
+        <div class="container" style="padding: 20px;">
+          <div class="hero-content" style="margin: 0; padding: 0;">
+            <h1 class="h1 hero-title has-after">
+              Bread Today, <br>
+              CAPITAL Tomorrow
+            </h1>
+            <p class="hero-text">
+             CAPITAL is all about flipping the script. <br>From Earning Bread to Living Big.
+            </p>
+          </div>
+          <div class="btn-wrapper">
+            <a href="cards.html" class="btn"><span class="span">VIEW STORE</span>
+                <ion-icon name="cart" aria-hidden="true"></ion-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    
+      <!-- 
+        - # FEATURED STORE SECTION / TITLE CARDS
+      -->
+         <section class="section offer has-bg-image" id="store-section" aria-label="special offer" style="overflow-x: hidden;">
+          <div class="container">
+            <h2 class="h2 section-title">FEATURED SECTION<br>________</h2>
+            <p class="section-text">
+              <br>The Below CCs Are On a 25% Discount.<br>This Offer Will Be Adjusted Soon.<br><br>
+            </p>
+            <a href="cards.html" 
+               class="btn" 
+               style="display: block; text-align: center; margin: 10px auto; padding: 15px 25px; background-color: #66c4cc; color: white; text-decoration: none; border-radius: 10px;">
+               VIEW MORE CCs
+            </a>
+          </div>
+        </section>
+
+      
+      <!-- 
+      - #FEATURED CCS SLIDER CAROUSEL
+      -->
+      <section>
+        <div class="carousel-container" style="overflow-x: hidden;">
+          <div class="carousel">
+            <div class="card" id="card1" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $8,476</div>
+                <div class="card-description">5399 **** **** 6904</div>
+                <div class="card-price">Price $705</div>
+                <div class="card-valid">THRU 05/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card2" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $27,831</div>
+                <div class="card-description">3009 **** **** 1135</div>
+                <div class="card-price">Price $2,320</div>
+                <div class="card-valid">THRU 11/26</div>    
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card3" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $63,220</div>
+                <div class="card-description">2522 **** **** 2424</div>
+                <div class="card-price">Price $3,715</div>
+                <div class="card-valid">THRU 06/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card4" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $13,489</div>
+                <div class="card-description">2199 **** **** 3053</div>
+                <div class="card-price">Price $1,125</div>
+                <div class="card-valid">THRU 04/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+      
+            <div class="card" id="card5" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $85,906</div>
+                <div class="card-description">62214 **** **** 0562</div>
+                <div class="card-price">Price $5,045</div>
+                <div class="card-valid">THRU 03/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+       
+            <div class="card" id="card6" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 21,674</div>
+                <div class="card-description">2399 **** **** 6904</div>
+                <div class="card-price">Price $1,805</div>
+                <div class="card-valid">THRU 12/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+      
+            <div class="card" id="card7" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 47,920</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $2,825</div>
+                <div class="card-valid">THRU 04/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card8" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 29,410</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $2,450</div>
+                <div class="card-valid">THRU 04/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card9" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $11,965</div>
+                <div class="card-description">62214 **** **** 0562</div>
+                <div class="card-price">Price $997</div>
+                <div class="card-valid">THRU 01/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card10" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 7,566</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $630</div>
+                <div class="card-valid">THRU 09/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+          </div>       
+        </div>
+      </section>
+
+      
+  <!-- COUNTDOWN SECTION -->
+      <section class="section offer has-bg-image" aria-label=" CARDS HEADING">
+        <h2 class="h3 section-title">LIST TO BE UPDATED IN 48 HOURS</h2>
+        <div id="countdown1" style="font-size: 36px; font-weight: bold; background: linear-gradient(to right, #0091e6, #ffffff); -webkit-background-clip: text; color: transparent;"></div>
+      
+        <script>
+          function formatTime(unit) {
+            return unit < 10 ? '0' + unit : unit;
+          }
+      
+          var savedCountdown = localStorage.getItem('countdownEndPage1');
+          var countdownDate;
+      
+          if (savedCountdown) {
+            countdownDate = new Date(savedCountdown).getTime();
+          } else {
+            countdownDate = new Date().getTime() + (48 * 60 * 60 * 1000);
+            localStorage.setItem('countdownEndPage1', new Date(countdownDate).toISOString());
+          }
+      
+          var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countdownDate - now;
+      
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+            document.getElementById("countdown1").innerHTML = formatTime(hours) + "h " + formatTime(minutes) + "m " + formatTime(seconds) + "s";
+      
+            if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("countdown1").innerHTML = "LIST UPDATED - RELOAD PAGE";
+              localStorage.removeItem('countdownEndPage1');
+            }
+          }, 1000);
+        </script>
+      </section>
+           
+
+      
+      <!-- 
+        - #FEATURED BANKS TEMP DOWN
+      -->
+
+      <!--       
+      <section class="section featured" aria-label="Featured Products">
+        <div class="container">
+          <h3 style="text-align: center;">Logs</h3>
+          <p class="section-text">
+            <br>Below is a list of the currently available banks. <br>Each Page Is Updated Every 48 Hours!
+          </p>
+      
+          <div class="log-container">
+      
+            <div class="log-card">
+              <a href="shop.html">
+                <img src="assets/images/chase.jpg" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="hunt.html">
+                <img src="assets/images/hunt.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="wells.html">
+                <img src="assets/images/wells.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="boa.html">
+                <img src="assets/images/boa.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="truist.html">
+                <img src="assets/images/truist.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="navy.html">
+                <img src="assets/images/navy.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="chime.html">
+                <img src="assets/images/chime.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+            <div class="log-card">
+              <a href="arvest.html">
+                <img src="assets/images/arvest.png" alt="Product Image" class="log-card-img">
+              </a>
+            </div>
+      
+          </div>
+          <p class="section-text">_____________________________</p>        
+        </div>
+      </section> -->
+
+      
+      <!-- 
+        - #ESCROW SECTION
+      -->
+      <section class="section esccrow" aria-label="escrow">
+        <div class="container">
+          <h2 class="h2 section-title">CASH ESCROW BOT</h2>
+          <p class="section-text">
+            <br><br>
+            Close Your Deals With Confidence - Use The CashEscrowBot In All Your Dealings.
+           <br>
+          </p>
+
+          <img src="assets/images/escrow1.jpg" 
+               style="display: block; margin: 20px auto; width: 70%; height: auto; border: 1px solid; border-radius: 20px;">
+          <a href="escrow.html" 
+             class="btn" 
+             style="display: block; text-align: center; margin: 40px auto; padding: 15px 25px; background-color: #66c4cc; color: white; text-decoration: none; border-radius: 10px;">
+             MORE ABOUT OUR ESCROW
+          </a>
+        </div> 
+      </section>
+
+
+    </article>
+  </main>
+
+  
+  <!-- 
+    - #FOOTER
+  -->
+  <footer class="footer has-bg-image" style="background-image: url('./assets/images/section-bg.jpg')">
+    <div class="footer-top section">
+      <div class="container grid-list">
+   
+        <div class="footer-brand" style="margin-left: 20px;">
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" width="100" height="auto" alt="Capital Home">
+          </a>
+          <p class="footer-text">
+            Your Opportunity To Make Today Count! 
+          </p>
+<!--           <ul class="social-list">
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link" style="font-size: 18px;">CHANNEL</a>
+            </li>
+            
+          </ul> -->
+        </div>
+        
+        <ul class="footer-list">
+          <li><p class="footer-list-title">LINKS</p></li>
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="escrow.html" class="footer-link">Escrow</a></li>
+          <li><a href="contact.html" class="footer-link">Support</a></li>
+          <li><a href="cart.html" class="footer-link">Your Bag</a></li>
+        </ul>
+        
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          ©️ Copyright 2024 | By King.
+        </p>
+  
+        <p class="footer-list-title">PAYMENTS<br><br></p>  
+          <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+            <img src="./assets/images/btc.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 1">
+            <img src="./assets/images/usdt.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 2">
+            <img src="./assets/images/eth.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 3">
+            <img src="./assets/images/lite.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 4">
+          </div>
+        <p><br><br><br></p>
+
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <!-- 
+  - Floating Cart Button 
+  -->
+  
+    <a href="cart.html" class="floating-cart-btn" aria-label="Cart" title="View Cart">
+      <span class="cart-icon">
+        <ion-icon name="cart" aria-hidden="true"></ion-icon>
+      </span>
+      <span class="cart-count">0</span>
+    </a>
+
+
+
+  
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/cart.js" defer></script>
+
+  
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>
+

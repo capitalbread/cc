@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cart - Capital</title>
+  <meta name="title" content="Bread Today - CAPITAL Tomorrow">
+  <meta name="description" content="CAPITAL is all about flipping the script. From Earning Bread to Living Big.">
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Work+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    .cart-item {
+      position: relative;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 162, 255, 0.06) /* Background color for contrast */
+    }
+
+    .cart-item img {
+      border-radius: 10px; /* Maintain the border radius for the image */
+      width: 100%;
+      max-width: 150px; /* Max width for image */
+      height: auto; /* Maintain aspect ratio */
+    }
+
+    .remove-item {
+      position: absolute;
+      top: 30px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .cart-item-info {
+      margin-left: 30px; /* Adjust based on the size of your remove button */
+      color: red; /* Red color for text */
+    }
+
+    
+/* Responsive styling for smaller devices */
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: row; /* Maintain horizontal layout */
+        align-items: center;
+        padding: 5px; /* Ensure compactness */
+      }
+
+      .cart-item-info {
+        margin-left: 5px; /* Minimal margin to fit content */
+        font-size: 12px; /* Smaller font size for mobile */
+        overflow: hidden; /* Ensure text fits within container */
+        white-space: nowrap; /* Prevent text wrapping */
+        text-overflow: ellipsis; /* Add ellipsis if text overflows */
+      }
+
+      .remove-item {
+        top: 60px; /* Adjust position for compact layout */
+        right: 10px;
+        width: 18px; /* Maintain smaller button size */
+        height: 18px;
+        font-size: 12px; /* Smaller font size */
+      }
+    }
+ 
+  </style>
+
+
+  
+</head>
+
+<body id="top">
+
+  <header class="header" data-header>
+    <div class="header-top">
+      <div class="container">
+
+        <a href="index.html" class="logo">
+          <img src="./assets/images/logo.svg" width="50" height="auto" alt="Logo home">
+        </a>
+
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search our store" class="input-field">
+
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+        <div class="header-action">
+          <button class="header-action-btn cart-btn" aria-label="cart" title="Cart">
+            <span class="span">0</span>
+            <ion-icon name="cart" aria-hidden="true"></ion-icon>
+          </button>
+
+          <button class="nav-open-btn" aria-label="open menu" title="Open Menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="header-bottom" data-navbar>
+      <div class="container">
+
+        <nav class="navbar">
+
+          <button class="nav-close-btn" data-nav-toggler aria-label="close menu" title="Close Menu">
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <div class="navbar-top">
+            <input type="search" name="search" placeholder="Search our store" class="input-field">
+
+            <button class="search-btn" aria-label="Search">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+
+          <ul class="navbar-list">
+
+            <li><a href="index.html" class="navbar-link">Home</a></li>
+            <li><a href="cards.html" class="navbar-link">Store</a></li>
+            <li><a href="escrow.html" class="navbar-link">Escrow</a></li>
+            <li><a href="cart.html" class="navbar-link">Your Bag</a></li>
+            <li><a href="contact.html" class="navbar-link">Support</a></li>
+
+          </ul>
+
+        </nav>
+        
+      </div>
+    </div>
+
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </header>
+
+  <main>
+    <article>
+      <section class="section offer has-bg-image" aria-label="CART HEADING"
+        style="background-image: url('./assets/images/section-bg.jpg');  margin: 20px; padding: 20px;">
+        <div class="container">
+          <h2 class="h2 section-title">Your Bag</h2> <br>
+        </div>
+      </section>
+
+      <div class="cart-container">
+        <h1><br>ADDED ITEMS<br><br></h1>
+          <p id="empty-cart-message" style="display: none;">Your Bag Is Empty. No Items Here!</p>
+        <div id="cart-list"></div>
+        <div class="total-container">
+          <div>Total:</div>
+          <div id="cart-total">$0.00</div>
+        </div>
+        <br><br>
+
+        
+          <!-- FUNCTION FOR CHECKOUT BUTTON  -->
+          <!-- Checkout Button -->
+          <!-- Checkout GRID AND FORMS -->
+
+      
+        <!-- Checkout Button -->
+        <button class="checkout-btn">Checkout</button>
+        
+       <!-- Popup Modal -->
+        <div class="modal-overlay" id="modal">
+          <div class="modal-content">
+            <h2>SELECT A METHOD</h2><br>
+            <div class="grid-container">
+              <div class="grid-item" data-target="form1">
+                <img src="./assets/images/btc.png" alt="Item 1" />
+              </div>
+              <div class="grid-item" data-target="form2">
+                <img src="./assets/images/eth.png" alt="Item 2" />
+              </div>
+              <div class="grid-item" data-target="form3">
+                <img src="./assets/images/usdt.png" alt="Item 3" />
+              </div>
+              <div class="grid-item" data-target="form4">
+                <img src="./assets/images/lite.png" alt="Item 4" />
+              </div>
+            </div>
+            
+            <br><br>
+            <div class="calculated-total" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+              <h3 style="margin: 0;">TO PAY:</h3>
+              <div id="modal-cart-total" style="font-size: 1.4em; color: #ffd900;">$0.00</div>
+            </div>
+
+
+          </div>
+        </div>
+
+        
+        <!-- SPECIFIC COIN CHECKOUT FORMS -->
+         <!-- Forms -->
+          
+           
+        <!-- Form 1 -->
+        <div class="form-overlay" id="form1">
+          <div class="form-container">
+              <h2>BITCOIN (BTC)</h2>
+              <h4>ADDRESS: <span id="btc-address" class="copyable">1Cahw7i3e2BiZc2gLW7uNd9s6JSHpmZXPr</span></h4>
+              <p>
+                Submit a screenshot of the successful deposit on the above address and a preferred email to receive your goods. <br><br>
+              </p>
+            <form id="checkout-form1" method="post">
+              <input type="email" name="email" placeholder="Email Address" required />
+              <input type="file" name="payment-screenshot" accept="image/*" required />
+              <button type="submit">Submit</button>
+            </form>
+            <button class="close-form">Close</button>
+              <p>
+                <br> <br>Payment is processed within 10 to 25 minutes. You'll receive a PASSCODE to unlock the zip containing your goods.<br><br>
+              </p>
+          </div>
+        </div>
+
+
+
+
+        <!-- Form 2 -->
+        <div class="form-overlay" id="form2">
+          <div class="form-container">
+              <h2>ETHERIUM (ETH)</h2>
+              <h4>ADDRESS: <span id="btc-address" class="copyable">1Cahw7i3e2BiZc2gLW7uNd9s6JSHpmZXPr</span></h4>
+              <p>
+                Submit a screenshot of the successful deposit on the above address and a preferred email to receive your goods. <br><br>
+              </p>
+            <form id="checkout-form2" method="post">
+              <input type="email" name="email" placeholder="Email Address" required />
+              <input type="file" name="payment-screenshot" accept="image/*" required />
+              <button type="submit">Submit</button>
+            </form>
+            <button class="close-form">Close</button>
+             <p>
+                <br> <br>Payment is processed within 10 to 25 minutes. You'll receive a PASSCODE to unlock the zip containing your goods.<br><br>
+             </p>
+          </div>
+        </div>
+
+
+
+        <!-- Form 3 -->
+        <div class="form-overlay" id="form3">
+          <div class="form-container">
+              <h2>TETHER (USDT)</h2>
+              <h4>ADDRESS: <span id="btc-address" class="copyable">1Cahw7i3e2BiZc2gLW7uNd9s6JSHpmZXPr</span></h4>
+              <p>
+                Submit a screenshot of the successful deposit on the above address and a preferred email to receive your goods. <br><br>
+              </p>
+            <form id="checkout-form3" method="post">
+              <input type="email" name="email" placeholder="Email Address" required />
+              <input type="file" name="payment-screenshot" accept="image/*" required />
+              <button type="submit">Submit</button>
+            </form>
+            <button class="close-form">Close</button>
+              <p>
+                <br> <br>Payment is processed within 10 to 25 minutes. You'll receive a PASSCODE to unlock the zip containing your goods.<br><br>
+              </p>
+          </div>
+        </div>
+        
+
+        <!-- Form 4 -->
+        <div class="form-overlay" id="form4">
+          <div class="form-container">
+              <h2>LITECOIN (LTC)</h2>
+              <h4>ADDRESS: <span id="btc-address" class="copyable">1Cahw7i3e2BiZc2gLW7uNd9s6JSHpmZXPr</span></h4>
+              <p>
+                Submit a screenshot of the successful deposit on the above address and a preferred email to receive your goods. <br><br>
+              </p>
+            <form id="checkout-form4" method="post">
+              <input type="email" name="email" placeholder="Email Address" required />
+              <input type="file" name="payment-screenshot" accept="image/*" required />
+              <button type="submit">Submit</button>
+            </form>
+            <button class="close-form">Close</button>
+             <p>
+                <br> <br>Payment is processed within 10 to 25 minutes. You'll receive a PASSCODE to unlock the zip containing your goods.<br><br>
+             </p>
+          </div>
+        </div>
+          
+          <!-- Popup Payment Confirmation -->
+          <div id="payment-popup" class="payment-popup"></div>
+          
+          <!-- Floating Back to Home Page Button -->
+          <a href="index.html" class="back-home-button" style="display: none;">Back To Home Page</a>
+     
+
+      </div>
+    </article>
+  </main>
+
+  
+ <!-- 
+    - #FOOTER
+  -->
+  <footer class="footer has-bg-image" style="background-image: url('./assets/images/section-bg.jpg')">
+    <div class="footer-top section">
+      <div class="container grid-list">
+   
+        <div class="footer-brand" style="margin-left: 20px;">
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" width="100" height="auto" alt="Capital Home">
+          </a>
+          <p class="footer-text">
+            Your Opportunity To Make Today Count! 
+          </p>
+<!--           <ul class="social-list">
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link" style="font-size: 18px;">CHANNEL</a>
+            </li>
+            
+          </ul> -->
+        </div>
+        
+        <ul class="footer-list">
+          <li><p class="footer-list-title">LINKS</p></li>
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="escrow.html" class="footer-link">Escrow</a></li>
+          <li><a href="contact.html" class="footer-link">Support</a></li>
+          <li><a href="cart.html" class="footer-link">Your Bag</a></li>
+        </ul>
+        
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          ©️ Copyright 2024 | By King.
+        </p>
+  
+        <p class="footer-list-title">PAYMENTS<br><br></p>  
+          <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+            <img src="./assets/images/btc.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 1">
+            <img src="./assets/images/usdt.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 2">
+            <img src="./assets/images/eth.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 3">
+            <img src="./assets/images/lite.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 4">
+          </div>
+        <p><br><br><br></p>
+
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/cart.js" defer></script>
+
+  
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>

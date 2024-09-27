@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CCS - Capital</title>
+  <meta name="title" content="Bread Today - CAPITAL Tomorrow">
+  <meta name="description" content="CAPITAL is all about flipping the script. From Earning Bread to Living Big.">
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Work+Sans:wght@400;500;700&display=swap"rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* General styling for cards container */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Card styling */
+    .card {
+      min-width: 300px; /* Adjust this width based on your design */
+      height: 180px; /* Adjust height as needed */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Align content to the left */
+      justify-content: flex-end; /* Position content at the bottom */
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-size: cover; /* Ensure background image covers the card */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Prevent background image from repeating */
+      color: white; /* Adjust text color to ensure visibility */
+      padding: 20px; /* Add padding to avoid text touching the edges */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+
+    /* Card info styling */
+    .card-info {
+      display: flex;
+      flex-direction: column; /* Stack title, description, and price vertically */
+      align-items: flex-start; /* Align items to the left */
+      position: absolute;
+      bottom: 16px;
+      width: calc(100% - 20px); /* Full width minus padding */
+      padding-left: 15px; /* Add left padding for spacing */
+      left: 15px; /* Ensure content is not too close to the left edge */
+      right: 15px; /* Ensure content is not too close to the right edge */
+    }
+
+    /* Card title */
+    .card-title {
+      font-weight: bold;
+      color: white;
+      margin-bottom: 5px; /* Space between title and description */
+    }
+
+    /* Card description */
+    .card-description {
+      font-size: 14px;
+      color: white;
+      margin-bottom: 5px; /* Space between description and price */
+    }
+
+    /* Card price */
+    .card-price {
+      font-size: 16px;
+      color: white;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body id="top" style="overflow-x: hidden;">
+
+  <!-- Header -->
+  <header class="header" data-header>
+    <div class="header-top">
+      <div class="container">
+
+        <a href="index.html" class="logo">
+          <img src="./assets/images/logo.svg" width="50" height="auto" alt="Logo home">
+        </a>
+
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search our store" class="input-field">
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+        <div class="header-action">
+          <button class="header-action-btn cart-btn" aria-label="cart" title="Cart" id="cart-btn">
+            <span class="span">0</span>
+            <ion-icon name="cart" aria-hidden="true"></ion-icon>
+          </button>
+
+          <button class="nav-open-btn" aria-label="open menu" title="Open Menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="header-bottom" data-navbar>
+      <div class="container">
+        
+        <nav class="navbar">
+          <button class="nav-close-btn" data-nav-toggler aria-label="close menu" title="Close Menu">
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+          <div class="navbar-top">
+            <input type="search" name="search" placeholder="Search our store" class="input-field">
+            <button class="search-btn" aria-label="Search">
+              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+
+          <ul class="navbar-list">
+            <li><a href="index.html" class="navbar-link">Home</a></li>
+            <li><a href="cards.html" class="navbar-link">Store</a></li>
+            <li><a href="escrow.html" class="navbar-link">Escrow</a></li>
+            <li><a href="cart.html" class="navbar-link">Your Bag</a></li>
+            <li><a href="contact.html" class="navbar-link">Support</a></li>
+          </ul>
+          
+        </nav>
+      </div>
+    </div>
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <article>
+
+      <!-- Store Section -->
+      <section class="section offer has-bg-image" aria-label=" CARDS HEADING"
+        style="background-image: url('./assets/images/section-bg.jpg');  margin: 20px; padding: 20px;">
+        <div class="container">
+          <h2 class="h2 section-title">AVAILABLE CCS <br>______________</h2> <br>
+        </div>
+      </section>
+
+      <!-- Cards in Columns -->
+      <section>
+        <div class="container">
+          <div class="card-grid">
+
+            <div class="card" id="card40" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $9,675</div>
+                <div class="card-description">42391 **** **** 8123</div>
+                <div class="card-price">Price $806</div>
+                <div class="card-valid">THRU 05/16</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card41" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $42,785</div>
+                <div class="card-description">83745 **** **** 2947</div>
+                <div class="card-price">Price $3,565</div>
+                <div class="card-valid">THRU 06/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card35" style="background-image: url('assets/images/card10.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $5,632</div>
+                <div class="card-description">84236 **** **** 7621</div>
+                <div class="card-price">Price $469</div>
+                <div class="card-valid">THRU 12/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card36" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $8,294</div>
+                <div class="card-description">98134 **** **** 4839</div>
+                <div class="card-price">Price $691</div>
+                <div class="card-valid">THRU 07/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card37" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $6,718</div>
+                <div class="card-description">74219 **** **** 3948</div>
+                <div class="card-price">Price $560</div>
+                <div class="card-valid">THRU 08/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card38" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $7,549</div>
+                <div class="card-description">49238 **** **** 6283</div>
+                <div class="card-price">Price $629</div>
+                <div class="card-valid">THRU 05/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card39" style="background-image: url('assets/images/card11.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $8,005</div>
+                <div class="card-description">53922 **** **** 1759</div>
+                <div class="card-price">Price $667</div>
+                <div class="card-valid">THRU 06/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card42" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $85,432</div>
+                <div class="card-description">23154 **** **** 9342</div>
+                <div class="card-price">Price $7,119</div>
+                <div class="card-valid">THRU 07/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card43" style="background-image: url('assets/images/card12.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $18,375</div>
+                <div class="card-description">67219 **** **** 5096</div>
+                <div class="card-price">Price $1,531</div>
+                <div class="card-valid">THRU 08/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card44" style="background-image: url('assets/images/card13.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $99,740</div>
+                <div class="card-description">94821 **** **** 3127</div>
+                <div class="card-price">Price $8,312</div>
+                <div class="card-valid">THRU 08/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card45" style="background-image: url('assets/images/card14.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $25,643</div>
+                <div class="card-description">38914 **** **** 8547</div>
+                <div class="card-price">Price $2,137</div>
+                <div class="card-valid">THRU 05/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card46" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $64,219</div>
+                <div class="card-description">56312 **** **** 4865</div>
+                <div class="card-price">Price $5,351</div>
+                <div class="card-valid">THRU 01/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card47" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $32,781</div>
+                <div class="card-description">74985 **** **** 1094</div>
+                <div class="card-price">Price $2,732</div>
+                <div class="card-valid">THRU 07/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card48" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $47,365</div>
+                <div class="card-description">93524 **** **** 7256</div>
+                <div class="card-price">Price $3,947</div>
+                <div class="card-valid">THRU 04/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card49" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $90,831</div>
+                <div class="card-description">62715 **** **** 3925</div>
+                <div class="card-price">Price $7,569</div>
+                <div class="card-valid">THRU 08/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card50" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $22,489</div>
+                <div class="card-description">52813 **** **** 5839</div>
+                <div class="card-price">Price $1,874</div>
+                <div class="card-valid">THRU 05/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card51" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $76,547</div>
+                <div class="card-description">25186 **** **** 7482</div>
+                <div class="card-price">Price $6,379</div>
+                <div class="card-valid">THRU 06/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card52" style="background-image: url('assets/images/card13.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $19,802</div>
+                <div class="card-description">68295 **** **** 1947</div>
+                <div class="card-price">Price $1,650</div>
+                <div class="card-valid">THRU 07/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card53" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $52,368</div>
+                <div class="card-description">75194 **** **** 3068</div>
+                <div class="card-price">Price $4,364</div>
+                <div class="card-valid">THRU 08/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card54" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $11,346</div>
+                <div class="card-description">19753 **** **** 6789</div>
+                <div class="card-price">Price $746</div>
+                <div class="card-valid">THRU 12/24</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card25" style="background-image: url('assets/images/card11.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $89,741</div>
+                <div class="card-description">83742 **** **** 1034</div>
+                <div class="card-price">Price $7,478</div>
+                <div class="card-valid">THRU 05/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card26" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $40,216</div>
+                <div class="card-description">93528 **** **** 2948</div>
+                <div class="card-price">Price $3,351</div>
+                <div class="card-valid">THRU 06/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card27" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $22,134</div>
+                <div class="card-description">31892 **** **** 6492</div>
+                <div class="card-price">Price $1,844</div>
+                <div class="card-valid">THRU 02/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card28" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $94,826</div>
+                <div class="card-description">58294 **** **** 7395</div>
+                <div class="card-price">Price $7,902</div>
+                <div class="card-valid">THRU 08/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card29" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $53,812</div>
+                <div class="card-description">79153 **** **** 2059</div>
+                <div class="card-price">Price $4,484</div>
+                <div class="card-valid">THRU 04/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card30" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $17,904</div>
+                <div class="card-description">47615 **** **** 8906</div>
+                <div class="card-price">Price $1,492</div>
+                <div class="card-valid">THRU 06/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card31" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $64,072</div>
+                <div class="card-description">94182 **** **** 7268</div>
+                <div class="card-price">Price $5,339</div>
+                <div class="card-valid">THRU 07/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card32" style="background-image: url('assets/images/card13.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $10,315</div>
+                <div class="card-description">32871 **** **** 4529</div>
+                <div class="card-price">Price $860</div>
+                <div class="card-valid">THRU 08/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card33" style="background-image: url('assets/images/card14.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $102,340</div>
+                <div class="card-description">61938 **** **** 3156</div>
+                <div class="card-price">Price $8,528</div>
+                <div class="card-valid">THRU 05/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card34" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $28,619</div>
+                <div class="card-description">79514 **** **** 5093</div>
+                <div class="card-price">Price $2,385</div>
+                <div class="card-valid">THRU 04/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card34" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $6,619</div>
+                <div class="card-description">19514 **** **** 5003</div>
+                <div class="card-price">Price $550</div>
+                <div class="card-valid">THRU 02/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card34" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $5,005</div>
+                <div class="card-description">20513 **** **** 5001</div>
+                <div class="card-price">Price $415</div>
+                <div class="card-valid">THRU 06/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+
+            <!-- CCS ON HOME PAGE - FEASTURED -->
+      
+           <div class="card" id="card1" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $8,476</div>
+                <div class="card-description">5399 **** **** 6904</div>
+                <div class="card-price">Price $705</div>
+                <div class="card-valid">THRU 05/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card2" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $27,831</div>
+                <div class="card-description">3009 **** **** 1135</div>
+                <div class="card-price">Price $2,320</div>
+                <div class="card-valid">THRU 11/26</div>    
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card3" style="background-image: url('assets/images/card3.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $63,220</div>
+                <div class="card-description">2522 **** **** 2424</div>
+                <div class="card-price">Price $3,715</div>
+                <div class="card-valid">THRU 06/27</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+            
+            <div class="card" id="card4" style="background-image: url('assets/images/card4.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $13,489</div>
+                <div class="card-description">2199 **** **** 3053</div>
+                <div class="card-price">Price $1,125</div>
+                <div class="card-valid">THRU 04/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+      
+            <div class="card" id="card5" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $85,906</div>
+                <div class="card-description">62214 **** **** 0562</div>
+                <div class="card-price">Price $5,045</div>
+                <div class="card-valid">THRU 03/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+       
+            <div class="card" id="card6" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 21,674</div>
+                <div class="card-description">2399 **** **** 6904</div>
+                <div class="card-price">Price $1,805</div>
+                <div class="card-valid">THRU 12/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+      
+            <div class="card" id="card7" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 47,920</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $2,825</div>
+                <div class="card-valid">THRU 04/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card8" style="background-image: url('assets/images/card2.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 29,410</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $2,450</div>
+                <div class="card-valid">THRU 04/25</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card9" style="background-image: url('assets/images/card5.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - $11,965</div>
+                <div class="card-description">62214 **** **** 0562</div>
+                <div class="card-price">Price $997</div>
+                <div class="card-valid">THRU 01/29</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card10" style="background-image: url('assets/images/card1.png');">
+              <div class="card-info">
+                <div class="card-title">BAL - 7,566</div>
+                <div class="card-description">1244 **** **** 2835</div>
+                <div class="card-price">Price $630</div>
+                <div class="card-valid">THRU 09/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+      
+        </div>
+      </section>
+
+
+      <!-- COUNTDOWN SECTION -->
+      <section class="section offer has-bg-image" aria-label=" CARDS HEADING">
+        <h2 class="h3 section-title">LIST TO BE UPDATED IN 48 HOURS</h2>
+        <div id="countdown2" style="font-size: 36px; font-weight: bold; background: linear-gradient(to right, #0091e6, #ffffff); -webkit-background-clip: text; color: transparent;"></div>
+      
+        <script>
+          function formatTime(unit) {
+            return unit < 10 ? '0' + unit : unit;
+          }
+      
+          var savedCountdown = localStorage.getItem('countdownEndPage2');
+          var countdownDate;
+      
+          if (savedCountdown) {
+            countdownDate = new Date(savedCountdown).getTime();
+          } else {
+            countdownDate = new Date().getTime() + (48 * 60 * 60 * 1000);
+            localStorage.setItem('countdownEndPage2', new Date(countdownDate).toISOString());
+          }
+      
+          var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countdownDate - now;
+      
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+            document.getElementById("countdown2").innerHTML = formatTime(hours) + "h " + formatTime(minutes) + "m " + formatTime(seconds) + "s";
+      
+            if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("countdown2").innerHTML = "LIST UPDATED - RELOAD PAGE";
+              localStorage.removeItem('countdownEndPage2');
+            }
+          }, 1000);
+        </script>
+      </section>
+
+
+      
+    </article>
+  </main>
+
+
+ 
+  <!-- 
+    - #FOOTER
+  -->
+    <div class="footer-top section">
+      <div class="container grid-list">
+   
+        <div class="footer-brand" style="margin-left: 20px;">
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" width="100" height="auto" alt="Capital Home">
+          </a>
+          <p class="footer-text">
+            Your Opportunity To Make Today Count! 
+          </p>
+<!--           <ul class="social-list">
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link" style="font-size: 18px;">CHANNEL</a>
+            </li>
+            
+          </ul> -->
+        </div>
+        
+        <ul class="footer-list">
+          <li><p class="footer-list-title">LINKS</p></li>
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="escrow.html" class="footer-link">Escrow</a></li>
+          <li><a href="contact.html" class="footer-link">Support</a></li>
+          <li><a href="cart.html" class="footer-link">Your Bag</a></li>
+        </ul>
+        
+      </div>
+    </div>
+
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          ©️ Copyright 2024 | By King.
+        </p>
+  
+        <p class="footer-list-title">PAYMENTS<br><br></p>  
+          <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+            <img src="./assets/images/btc.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 1">
+            <img src="./assets/images/usdt.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 2">
+            <img src="./assets/images/eth.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 3">
+            <img src="./assets/images/lite.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 4">
+          </div>
+        <p><br><br><br></p>
+
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <!-- 
+  - Floating Cart Button 
+  -->
+  
+    <a href="cart.html" class="floating-cart-btn" aria-label="Cart" title="View Cart">
+      <span class="cart-icon">
+        <ion-icon name="cart" aria-hidden="true"></ion-icon>
+      </span>
+      <span class="cart-count">0</span>
+    </a>
+
+
+
+  
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/cart.js" defer></script>
+
+  
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>
+
+
+

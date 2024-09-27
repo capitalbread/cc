@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CCS - Capital</title>
+  <meta name="title" content="Bread Today - CAPITAL Tomorrow">
+  <meta name="description" content="CAPITAL is all about flipping the script. From Earning Bread to Living Big.">
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* General styling for cards container */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Card styling */
+    .card {
+      min-width: 300px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Image styling */
+    .card img {
+      max-width: 100%;
+      height: 50PX;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    /* Card info styling */
+    .card-info {
+      margn-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Card title */
+    .card-title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    /* Card description */
+    .card-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    /* Card price */
+    .card-price {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* Add to Cart Button */
+    .add-to-cart-btn {
+      padding: 10px 20px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #ff4500;
+    }
+  </style>
+</head>
+
+<body id="top" style="overflow-x: hidden;">
+
+  <!-- Header -->
+  <!-- (Header code remains the same as your original) -->
+
+  <!-- Main Content -->
+  <main>
+    <article>
+
+      <!-- Store Section -->
+      <section class="section offer has-bg-image" aria-label=" CARDS HEADING"
+        style="background-image: url('./assets/images/section-bg.jpg'); margin: 20px; padding: 20px;">
+        <div class="container">
+          <h2 class="h2 section-title">AVAILABLE LOGS <br>______________</h2> <br>
+        </div>
+      </section>
+
+      <!-- Cards in Columns -->
+      <section>
+        <div class="container">
+          <div class="card-grid">
+            
+            <div class="card" id="card41">
+              <img src="./assets/images/boa.png" alt="Card Image 1">
+              <div class="card-info">
+                <div class="card-title">BAL - $9,680</div>
+                <div class="card-description">BOA LOG</div>
+                <div class="card-price">Price $320</div>
+                <div class="card-valid">THRU 05/28</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <div class="card" id="card42">
+              <img src="./assets/images/chase.png" alt="Card Image 2">
+              <div class="card-info">
+                <div class="card-title">BAL - $29,680</div>
+                <div class="card-description">Chase Log</div>
+                <div class="card-price">Price $710</div>
+                <div class="card-valid">THRU 04/26</div>
+              </div>
+              <button class="add-to-cart-btn">Add To Bag</button>
+            </div>
+
+            <!-- Add more cards in the same format -->
+            
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer has-bg-image" style="background-image: url('./assets/images/section-bg.jpg')">
+    <div class="footer-top section">
+      <div class="container grid-list">
+        <div class="footer-brand" style="margin-left: 20px;">
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" width="100" height="auto" alt="Capital Home">
+          </a>
+          <p class="footer-text">
+            Your Opportunity To Make Today Count! 
+          </p>
+          <ul class="social-list">
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/thedimebag" class="social-link" style="font-size: 18px;">CHANNEL</a>
+            </li>
+          </ul>
+        </div>
+        <ul class="footer-list">
+          <li><p class="footer-list-title">LINKS</p></li>
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="escrow.html" class="footer-link">Escrow</a></li>
+          <li><a href="contact.html" class="footer-link">Support</a></li>
+          <li><a href="cart.html" class="footer-link">Your Bag</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          ©️ Copyright 2024 | By King.
+        </p>
+        <p class="footer-list-title">PAYMENTS<br><br></p>  
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+          <img src="./assets/images/btc.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 1">
+          <img src="./assets/images/usdt.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 2">
+          <img src="./assets/images/eth.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 3">
+          <img src="./assets/images/lite.png" style="height: 30px; width: auto;" loading="lazy" alt="Payment method 4">
+        </div>
+        <p><br><br><br></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Cart Button -->
+  <a href="cart.html" class="floating-cart-btn" aria-label="Cart" title="View Cart">
+    <span class="cart-icon">
+      <ion-icon name="cart" aria-hidden="true"></ion-icon>
+    </span>
+    <span class="cart-count">0</span>
+  </a>
+
+  <!-- Custom JS link -->
+  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/cart.js" defer></script>
+
+  <!-- Ionicon link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
