@@ -81,13 +81,6 @@
       color: white;
       margin-bottom: 20px;
     }
-    #sort-options {
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
   </style>
 </head>
 
@@ -140,7 +133,7 @@
           <ul class="navbar-list">
             <li><a href="index.html" class="navbar-link">Home</a></li>
             <li><a href="cards.html" class="navbar-link">Store</a></li>
-            <li><a href="escrow.html" class="navbar-link">Escrow</a></li>
+<!--        <li><a href="escrow.html" class="navbar-link">Escrow</a></li> -->
             <li><a href="cart.html" class="navbar-link">Your Bag</a></li>
             <li><a href="contact.html" class="navbar-link">Support</a></li>
           </ul>
@@ -160,12 +153,37 @@
         style="background-image: url('./assets/images/section-bg.jpg'); margin: 20px; padding: 20px;">
         <div class="container">
           <h2 class="h2 section-title">AVAILABLE CCS <br>______________</h2> <br>
-          <h4>Sort By ⬇</h4>
-          <select id="sort-options">
-            <option value="price">Price</option>
-            <option value="balance">Available Balance</option>
-            <option value="expiry">Expiry Date</option>
-          </select>
+          
+          <!-- Sort Button and Dropdown -->
+          <div id="sort-container" style="position: relative; display: inline-block;">
+            <button id="sort-button" style="
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            ">
+              Sort By
+            </button>
+            <ul id="sort-options" style="
+                position: absolute;
+                top: 100%;
+                left: 0;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+                background-color: white;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: none;
+            ">
+              <li data-value="price" style="padding: 5px; cursor: pointer;">Price</li>
+              <li data-value="balance" style="padding: 5px; cursor: pointer;">Available Balance</li>
+              <li data-value="expiry" style="padding: 5px; cursor: pointer;">Expiry Date</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -728,12 +746,13 @@
   -->
   <script src="./assets/js/script.js" defer></script>
   <script src="./assets/js/cart.js" defer></script>
+  <script src="./assets/js/sort.js" derer></script>
 
   
   <!-- 
     - ionicon link
   -->
-    <script>
+<!--     <script>
     document.getElementById('sort-options').addEventListener('change', function () {
       const sortBy = this.value;
       const cardContainer = document.querySelector('.card-grid');
@@ -770,7 +789,7 @@
       cardContainer.innerHTML = '';
       cards.forEach(card => cardContainer.appendChild(card));
     });
-  </script>
+  </script> -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
