@@ -81,6 +81,13 @@
       color: white;
       margin-bottom: 20px;
     }
+    #sort-options {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 
@@ -149,10 +156,16 @@
     <article>
 
       <!-- Store Section -->
-      <section class="section offer has-bg-image" aria-label=" CARDS HEADING"
-        style="background-image: url('./assets/images/section-bg.jpg');  margin: 20px; padding: 20px;">
+      <section class="section offer has-bg-image" aria-label="CARDS HEADING"
+        style="background-image: url('./assets/images/section-bg.jpg'); margin: 20px; padding: 20px;">
         <div class="container">
           <h2 class="h2 section-title">AVAILABLE CCS <br>______________</h2> <br>
+          <h4>Sort By ⬇</h4>
+          <select id="sort-options">
+            <option value="price">Price</option>
+            <option value="balance">Available Balance</option>
+            <option value="expiry">Expiry Date</option>
+          </select>
         </div>
       </section>
 
@@ -720,6 +733,44 @@
   <!-- 
     - ionicon link
   -->
+    <script>
+    document.getElementById('sort-options').addEventListener('change', function () {
+      const sortBy = this.value;
+      const cardContainer = document.querySelector('.card-grid');
+      const cards = Array.from(cardContainer.getElementsByClassName('card'));
+  
+      const parseBalance = (text) => parseInt(text.replace(/[^\d]/g, ''), 10);
+      const parsePrice = (text) => parseFloat(text.replace(/[^\d.]/g, ''));
+      const parseDate = (text) => {
+        const [month, year] = text.split('/').map(Number);
+        return new Date(`20${year}`, month - 1);
+      };
+  
+      const compareFunctions = {
+        price: (a, b) => {
+          const priceA = parsePrice(a.querySelector('.card-price').textContent);
+          const priceB = parsePrice(b.querySelector('.card-price').textContent);
+          return priceA - priceB;
+        },
+        balance: (a, b) => {
+          const balanceA = parseBalance(a.querySelector('.card-title').textContent);
+          const balanceB = parseBalance(b.querySelector('.card-title').textContent);
+          return balanceA - balanceB;
+        },
+        expiry: (a, b) => {
+          const dateA = parseDate(a.querySelector('.card-valid').textContent.replace('THRU ', ''));
+          const dateB = parseDate(b.querySelector('.card-valid').textContent.replace('THRU ', ''));
+          return dateA - dateB;
+        },
+      };
+  
+      cards.sort(compareFunctions[sortBy]);
+  
+      // Clear and re-append sorted cards
+      cardContainer.innerHTML = '';
+      cards.forEach(card => cardContainer.appendChild(card));
+    });
+  </script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
