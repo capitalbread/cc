@@ -155,35 +155,51 @@
           <h2 class="h2 section-title">AVAILABLE CCS <br>______________</h2> <br>
           
           <!-- Sort Button and Dropdown -->
-          <div id="sort-container" style="position: relative; display: inline-block;">
-            <button id="sort-button" style="
-                padding: 10px 20px;
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            ">
-              Sort By
-            </button>
-            <ul id="sort-options" style="
-                position: absolute;
-                top: 100%;
-                left: 0;
-                list-style-type: none;
-                margin: 0;
-                padding: 10px;
+            <div id="sort-container" style="position: relative; display: inline-block;">
+              <button id="sort-button" style="
+                  padding: 10px 20px;
+                  background-color: #007BFF;
+                  color: white;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+              ">
+                Sort By
+              </button>
+            </div>
+            
+            <!-- Sort Options Popup -->
+            <div id="sort-popup" style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
                 background-color: white;
                 border: 1px solid #ccc;
                 border-radius: 5px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                display: none;
+                z-index: 1000;
             ">
-              <li data-value="price" style="padding: 5px; cursor: pointer;">Price</li>
-              <li data-value="balance" style="padding: 5px; cursor: pointer;">Available Balance</li>
-              <li data-value="expiry" style="padding: 5px; cursor: pointer;">Expiry Date</li>
-            </ul>
-          </div>
+              <ul id="sort-options" style="list-style-type: none; margin: 0; padding: 0;">
+                <li data-value="price" style="padding: 10px; cursor: pointer;">Price</li>
+                <li data-value="balance" style="padding: 10px; cursor: pointer;">Available Balance</li>
+                <li data-value="expiry" style="padding: 10px; cursor: pointer;">Expiry Date</li>
+              </ul>
+            </div>
+            
+            <!-- Overlay (for closing the popup when clicked outside) -->
+            <div id="overlay" style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            "></div>
         </div>
       </section>
 
@@ -749,26 +765,35 @@
 
   
   <!-- 
-    - ionicon link
+   Js
   -->
   <script>
-      // JavaScript for Sorting Cards
       document.addEventListener('DOMContentLoaded', () => {
         const sortButton = document.getElementById('sort-button');
+        const sortPopup = document.getElementById('sort-popup');
+        const overlay = document.getElementById('overlay');
         const sortOptions = document.getElementById('sort-options');
         const cardGrid = document.querySelector('.card-grid');
       
-        // Show/Hide sort dropdown
+        // Open the sort popup when the button is clicked
         sortButton.addEventListener('click', () => {
-          sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
+          sortPopup.style.display = 'block';
+          overlay.style.display = 'block';
         });
       
-        // Sort cards based on selected option
+        // Close the popup when clicking outside of it (on overlay)
+        overlay.addEventListener('click', () => {
+          sortPopup.style.display = 'none';
+          overlay.style.display = 'none';
+        });
+      
+        // Sort the cards based on the selected option
         sortOptions.addEventListener('click', (event) => {
           if (event.target.tagName === 'LI') {
             const sortType = event.target.getAttribute('data-value');
             sortCards(sortType);
-            sortOptions.style.display = 'none';
+            sortPopup.style.display = 'none';
+            overlay.style.display = 'none';
           }
         });
       
