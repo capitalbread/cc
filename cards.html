@@ -746,50 +746,68 @@
   -->
   <script src="./assets/js/script.js" defer></script>
   <script src="./assets/js/cart.js" defer></script>
-  <script src="./assets/js/sort.js" derer></script>
 
   
   <!-- 
     - ionicon link
   -->
-<!--     <script>
-    document.getElementById('sort-options').addEventListener('change', function () {
-      const sortBy = this.value;
-      const cardContainer = document.querySelector('.card-grid');
-      const cards = Array.from(cardContainer.getElementsByClassName('card'));
+  <script>
+      // JavaScript for Sorting Cards
+      document.addEventListener('DOMContentLoaded', () => {
+        const sortButton = document.getElementById('sort-button');
+        const sortOptions = document.getElementById('sort-options');
+        const cardGrid = document.querySelector('.card-grid');
+      
+        // Show/Hide sort dropdown
+        sortButton.addEventListener('click', () => {
+          sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
+        });
+      
+        // Sort cards based on selected option
+        sortOptions.addEventListener('click', (event) => {
+          if (event.target.tagName === 'LI') {
+            const sortType = event.target.getAttribute('data-value');
+            sortCards(sortType);
+            sortOptions.style.display = 'none';
+          }
+        });
+      
+        // Function to sort cards
+        function sortCards(sortType) {
+          const cards = Array.from(cardGrid.children);
+      
+          cards.sort((a, b) => {
+            const aInfo = extractCardInfo(a);
+            const bInfo = extractCardInfo(b);
+      
+            switch (sortType) {
+              case 'price':
+                return aInfo.price - bInfo.price; // Sort by price (low to high)
+              case 'balance':
+                return bInfo.balance - aInfo.balance; // Sort by balance (high to low)
+              case 'expiry':
+                return new Date(aInfo.expiry) - new Date(bInfo.expiry); // Sort by expiry date (earliest first)
+              default:
+                return 0;
+            }
+          });
+      
+          // Re-render sorted cards
+          cardGrid.innerHTML = '';
+          cards.forEach(card => cardGrid.appendChild(card));
+        }
+      
+        // Function to extract card information
+        function extractCardInfo(card) {
+          const price = parseFloat(card.querySelector('.card-price').textContent.replace(/[^0-9.]/g, ''));
+          const balance = parseFloat(card.querySelector('.card-title').textContent.replace(/[^0-9.]/g, ''));
+          const expiry = card.querySelector('.card-valid').textContent.replace('THRU ', '').trim();
+      
+          return { price, balance, expiry };
+        }
+      });
+  </script>
   
-      const parseBalance = (text) => parseInt(text.replace(/[^\d]/g, ''), 10);
-      const parsePrice = (text) => parseFloat(text.replace(/[^\d.]/g, ''));
-      const parseDate = (text) => {
-        const [month, year] = text.split('/').map(Number);
-        return new Date(`20${year}`, month - 1);
-      };
-  
-      const compareFunctions = {
-        price: (a, b) => {
-          const priceA = parsePrice(a.querySelector('.card-price').textContent);
-          const priceB = parsePrice(b.querySelector('.card-price').textContent);
-          return priceA - priceB;
-        },
-        balance: (a, b) => {
-          const balanceA = parseBalance(a.querySelector('.card-title').textContent);
-          const balanceB = parseBalance(b.querySelector('.card-title').textContent);
-          return balanceA - balanceB;
-        },
-        expiry: (a, b) => {
-          const dateA = parseDate(a.querySelector('.card-valid').textContent.replace('THRU ', ''));
-          const dateB = parseDate(b.querySelector('.card-valid').textContent.replace('THRU ', ''));
-          return dateA - dateB;
-        },
-      };
-  
-      cards.sort(compareFunctions[sortBy]);
-  
-      // Clear and re-append sorted cards
-      cardContainer.innerHTML = '';
-      cards.forEach(card => cardContainer.appendChild(card));
-    });
-  </script> -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
