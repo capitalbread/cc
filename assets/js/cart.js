@@ -173,6 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Message sent to Telegram!');
             alert('Your request has been sent!'); // Prevent default popup
 
+            // Clear cart and reset the UI
             localStorage.removeItem('cartItems');
             renderCartItems();
 
@@ -203,22 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         })
         .catch(error => console.error('Error:', error));
-
-      // If you need to send an image separately, you can add this step after the message:
-      // fetch(`https://api.telegram.org/bot${telegramApiKey}/sendPhoto`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     chat_id: chatId,
-      //     photo: "URL_or_file_id_of_your_image",
-      //   }),
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   console.log('Image sent:', data);
-      // });
     });
   });
 
