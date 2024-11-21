@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[id^="checkout-form"]').forEach(function (form) {
     form.addEventListener('submit', function (event) {
       event.preventDefault(); // Prevent the default form submission behavior
-
+  
       // Gather the form data
       const formData = new FormData(form);
       let message = 'Sold Goods Submission:\n';
@@ -150,18 +150,15 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         message += 'No items in the cart.\n';
       }
-
+  
       // Append user information
       const userEmail = formData.get('email') || 'No email provided'; // Adjust the key as necessary
       message += `By User: ${userEmail}\n`;
-
-      // Include the submitted image (if applicable)
+  
+      // Get the submitted image
       const submittedImage = formData.get('payment-screenshot'); // Change the key to match your form's file input
-      if (submittedImage) {
-        message += `Image: [Payment Screenshot]\n`; // Link or text placeholder for the image
-      }
-
-      // Send the data to Telegram
+  
+      // Send the message first (without the image)
       fetch(`https://api.telegram.org/bot${telegramApiKey}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -176,35 +173,55 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(response => response.json())
       .then(data => {
         if (data.ok) {
-          // Display the payment confirmation popup
-          const paymentPopup = document.getElementById('payment-popup');
-          paymentPopup.innerHTML = `
-            ✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br>
-            If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br>
-            Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed!
-          `;
-          paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
-          paymentPopup.style.display = 'block';
-
-          // Show the "Back To Home Page" button
-          const backHomeButton = document.querySelector('.back-home-button');
-          backHomeButton.style.display = 'block';
-
-          // Hide the form
-          const formOverlay = form.closest('.form-overlay');
-          formOverlay.style.display = 'none';
-
-          // Clear the form inputs
-          form.reset();
-
-          // Clear the cart
-          clearCart();
+          // After the message is sent, check if the image exists and upload it
+          if (submittedImage) {
+            // Create a FormData object to send the image file
+            const imageFormData = new FormData();
+            imageFormData.append('photo', submittedImage);
+  
+            // Send the image separately using sendPhoto
+            fetch(`https://api.telegram.org/bot${telegramApiKey}/sendPhoto`, {
+              method: 'POST',
+              body: imageFormData,
+            })
+            .then(response => response.json())
+            .then(imageData => {
+              if (imageData.ok) {
+                // Display the payment confirmation popup
+                const paymentPopup = document.getElementById('payment-popup');
+                paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br>
+                                          If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br>
+                                          Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed!`;
+                paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
+                paymentPopup.style.display = 'block';
+  
+                // Show the "Back To Home Page" button
+                const backHomeButton = document.querySelector('.back-home-button');
+                backHomeButton.style.display = 'block';
+  
+                // Hide the form
+                const formOverlay = form.closest('.form-overlay');
+                formOverlay.style.display = 'none';
+  
+                // Clear the form inputs
+                form.reset();
+  
+                // Clear the cart
+                clearCart();
+              } else {
+                console.error('Error sending image to Telegram:', imageData.description);
+              }
+            })
+            .catch(error => {
+              console.error('Error sending image:', error);
+            });
+          }
         } else {
           console.error('Error sending message to Telegram:', data.description);
         }
       })
       .catch(error => {
-        console.error('Error:', error);
+        console.error('Error sending message:', error);
       });
     });
   });
