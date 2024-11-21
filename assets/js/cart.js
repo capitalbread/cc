@@ -162,81 +162,85 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Function to handle form submission and send data to Telegram
-  function handleFormSubmit(formId, messagePrefix) {
-      document.getElementById(formId).addEventListener("submit", function (event) {
-          event.preventDefault();
-  
-          // Collect form data
-          var email = document.querySelector(`#${formId} input[name="email"]`).value;
-          var messageContent = document.querySelector(`#${formId} textarea[name="message"]`) ? document.querySelector(`#${formId} textarea[name="message"]`).value : '';
-          var fileInput = document.querySelector(`#${formId} input[name="payment-screenshot"]`);
-          var photo = fileInput.files[0];
-  
-          // Fetch cart items from localStorage
-          const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-  
-          // Format the cart items into a message
-          let cartItemsMessage = 'Cart Items:\n';
-          cartItems.forEach(item => {
-              cartItemsMessage += `   ${item.title} - ${item.price}\n`; // Modify this line as needed based on the structure of your cart items
-          });
-  
-          // Combine form data and cart items into a single message
-          var message = `${messagePrefix} Email: ${email}\nMessage: ${messageContent}\n${cartItemsMessage}`;
-  
-          // First, send the photo (if any)
-          if (photo) {
-              sendTelegramPhoto(photo)
-                  .then(response => response.json())
-                  .then(data => {
-                      if (data.ok) {
-                          console.log("Proof Sent Successfully!");
-                      } else {
-                          console.log("Error sending photo:", data);
-                      }
-                  })
-                  .catch(error => {
-                      console.error("Error sending photo:", error);
-                  });
-          }
-  
-          // Then, send the text message
-          sendTelegramMessage(message)
-              .then(response => response.json())
-              .then(data => {
-                  if (data.ok) {
-                      console.log("Message sent successfully!");
-  
-                      // Show custom payment confirmation message with success text and image
-                      const paymentPopup = document.getElementById('payment-popup');
-                      paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
-                      paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
-                      paymentPopup.style.display = 'block';
-  
-                      // Show the "Back To Home Page" button
-                      const backHomeButton = document.querySelector('.back-home-button');
-                      backHomeButton.style.display = 'block';
-  
-                      // Add event listener to "Back to Home" button
-                      backHomeButton.addEventListener('click', function () {
-                          window.location.href = '/';  // Redirect to the home page
-                      });
-  
-                      // Hide the form
-                      const formOverlay = document.querySelector(`#${formId}`).closest('.form-overlay');
-                      formOverlay.style.display = 'none';
-  
-                      // Clear the form inputs
-                      document.getElementById(formId).reset();
-                  } else {
-                      console.log("Error sending message:", data);
-                  }
-              })
-              .catch(error => {
-                  console.error("Error sending message:", error);
-              });
-      });
-  }
+    function handleFormSubmit(formId, messagePrefix) {
+        document.getElementById(formId).addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            // Collect form data
+            var email = document.querySelector(`#${formId} input[name="email"]`).value;
+            var messageContent = document.querySelector(`#${formId} textarea[name="message"]`) ? document.querySelector(`#${formId} textarea[name="message"]`).value : '';
+            var fileInput = document.querySelector(`#${formId} input[name="payment-screenshot"]`);
+            var photo = fileInput.files[0];
+    
+            // Fetch cart items from localStorage
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+            // Format the cart items into a message
+            let cartItemsMessage = 'Cart Items:\n';
+            cartItems.forEach(item => {
+                cartItemsMessage += `   ${item.title} - ${item.price}\n`; // Modify this line as needed based on the structure of your cart items
+            });
+    
+            // Combine form data and cart items into a single message
+            var message = `${messagePrefix} Email: ${email}\nMessage: ${messageContent}\n${cartItemsMessage}`;
+    
+            // First, send the photo (if any)
+            if (photo) {
+                sendTelegramPhoto(photo)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            console.log("Proof Sent Successfully!");
+                        } else {
+                            console.log("Error sending photo:", data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error sending photo:", error);
+                    });
+            }
+    
+            // Then, send the text message
+            sendTelegramMessage(message)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log("Message sent successfully!");
+    
+                        // Show custom payment confirmation message with success text and image
+                        const paymentPopup = document.getElementById('payment-popup');
+                        paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
+                        paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
+                        paymentPopup.style.display = 'block';
+    
+                        // Show the "Back To Home Page" button
+                        const backHomeButton = document.querySelector('.back-home-button');
+                        backHomeButton.style.display = 'block';
+    
+                        // Add event listener to "Back to Home" button
+                        backHomeButton.addEventListener('click', function () {
+                            window.location.href = '/';  // Redirect to the home page
+                        });
+    
+                        // Hide the form
+                        const formOverlay = document.querySelector(`#${formId}`).closest('.form-overlay');
+                        formOverlay.style.display = 'none';
+    
+                        // Clear the form inputs
+                        document.getElementById(formId).reset();
+    
+                        // Clear the cart after form submission
+                        clearCart();
+                    } else {
+                        console.log("Error sending message:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error sending message:", error);
+                });
+        });
+    }
+
 
 
   // Attach event listeners to each form
