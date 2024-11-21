@@ -172,8 +172,17 @@ document.addEventListener('DOMContentLoaded', function () {
           var fileInput = document.querySelector(`#${formId} input[name="payment-screenshot"]`);
           var photo = fileInput.files[0];
   
-          // Combine form data into a single message
-          var message = `${messagePrefix} Email: ${email}\nMessage: ${messageContent}`;
+          // Fetch cart items from localStorage
+          const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  
+          // Format the cart items into a message
+          let cartItemsMessage = 'Cart Items:\n';
+          cartItems.forEach(item => {
+              cartItemsMessage += `   ${item.title} - ${item.price}\n`; // Modify this line as needed based on the structure of your cart items
+          });
+  
+          // Combine form data and cart items into a single message
+          var message = `${messagePrefix} Email: ${email}\nMessage: ${messageContent}\n${cartItemsMessage}`;
   
           // First, send the photo (if any)
           if (photo) {
