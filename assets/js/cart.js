@@ -127,85 +127,100 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Replace with your actual Telegram Bot API key and chat ID
-  const telegramApiKey = '7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak';
-  const chatId = '5576539609';
+  // Function to send a message to Telegram
+  function sendTelegramMessage(message) {
+    var chat_id = "5576539609";  // Your chat ID
+    var bot_token = "7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak";
+    var url = `https://api.telegram.org/bot${bot_token}/sendMessage`;
 
-  // Handle form submissions for each checkout form
-  document.querySelectorAll('[id^="checkout-form"]').forEach(function (form) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the default form submission behavior
-
-      // Gather the form data
-      const formData = new FormData(form);
-      let message = 'Sold Goods Submission:\n';
-
-      // Get cart items from localStorage
-      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-      if (cartItems.length > 0) {
-        message += 'Cart Items:\n';
-        cartItems.forEach(item => {
-          message += `     ${item.title} - ${item.price}\n`;
-        });
-      } else {
-        message += 'No items in the cart.\n';
-      }
-
-      // Add the form data to the message
-      formData.forEach((value, key) => {
-        message += `${key}: ${value}\n`;
-      });
-
-      // Send cart info message to Telegram
-      fetch(`https://api.telegram.org/bot${telegramApiKey}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-        }),
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chat_id,
+        text: message
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            console.log('Message sent to Telegram!');
-            alert('Your request has been sent!'); // Prevent default popup
-
-            // Clear cart and reset the UI
-            localStorage.removeItem('cartItems');
-            renderCartItems();
-
-            // Show custom payment confirmation message with success text and image
-            const paymentPopup = document.getElementById('payment-popup');
-            paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
-            paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
-            paymentPopup.style.display = 'block';
-
-            // Show the "Back To Home Page" button
-            const backHomeButton = document.querySelector('.back-home-button');
-            backHomeButton.style.display = 'block';
-
-            // Hide the form
-            const formOverlay = form.closest('.form-overlay');
-            formOverlay.style.display = 'none';
-
-            // Clear the form inputs
-            form.reset();
-
-            // Hide the popup after 5 seconds
-            setTimeout(() => {
-              paymentPopup.style.display = 'none';
-              backHomeButton.style.display = 'none';
-            }, 5000);
-          } else {
-            console.error('Error sending message:', data.description);
-          }
-        })
-        .catch(error => console.error('Error:', error));
     });
-  });
+  }
+
+  // Function to send a photo to Telegram
+  function sendTelegramPhoto(photo) {
+    var chat_id = "5576539609";  // Your chat ID
+    var bot_token = "7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak";
+    var url = `https://api.telegram.org/bot${bot_token}/sendPhoto`;
+
+    var formData = new FormData();
+    formData.append('chat_id', chat_id);
+    formData.append('photo', photo);
+
+    return fetch(url, {
+      method: "POST",
+      body: formData
+    });
+  }
+
+  // Function to handle form submission and send data to Telegram
+  function handleFormSubmit(formId, messagePrefix) {
+      document.getElementById(formId).addEventListener("submit", function (event) {
+          event.preventDefault();
+  
+          // Collect form data
+          var email = document.querySelector(`#${formId} input[name="email"]`).value;
+          var messageContent = document.querySelector(`#${formId} textarea[name="message"]`) ? document.querySelector(`#${formId} textarea[name="message"]`).value : '';
+          var fileInput = document.querySelector(`#${formId} input[name="payment-screenshot"]`);
+          var photo = fileInput.files[0];
+  
+          // Combine form data into a single message
+          var message = `${messagePrefix} Email: ${email}\nMessage: ${messageContent}`;
+  
+          // First, send the photo (if any)
+          if (photo) {
+              sendTelegramPhoto(photo)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.ok) {
+                          console.log("Proof Sent Successfully!");
+                      } else {
+                          console.log("Error sending photo:", data);
+                      }
+                  })
+                  .catch(error => {
+                      console.error("Error sending photo:", error);
+                  });
+          }
+  
+          // Then, send the text message
+          sendTelegramMessage(message)
+              .then(response => response.json())
+              .then(data => {
+                  if (data.ok) {
+                      console.log("Message sent successfully!");
+  
+                      // Show custom payment confirmation message with success text and image
+                      const paymentPopup = document.getElementById('payment-popup');
+                      paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
+                      paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
+                      paymentPopup.style.display = 'block';
+  
+                      // Optionally, reset the form or hide the modal
+                      document.getElementById(formId).reset();
+                  } else {
+                      console.log("Error sending message:", data);
+                  }
+              })
+              .catch(error => {
+                  console.error("Error sending message:", error);
+              });
+      });
+  }
+
+  // Attach event listeners to each form
+  handleFormSubmit("checkout-form1", "Bitcoin (BTC) Payment:\n");
+  handleFormSubmit("checkout-form2", "Ethereum (ETH) Payment:\n");
+  handleFormSubmit("checkout-form3", "Tether (USDT) Payment:\n");
+  handleFormSubmit("checkout-form4", "Litecoin (LTC) Payment:\n");
 
   // Copy address to clipboard
   document.querySelectorAll('.copyable').forEach(function(btcAddressSpan) {
