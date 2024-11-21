@@ -213,7 +213,20 @@ document.addEventListener('DOMContentLoaded', function () {
                       paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
                       paymentPopup.style.display = 'block';
   
-                      // Optionally, reset the form or hide the modal
+                      // Show the "Back To Home Page" button
+                      const backHomeButton = document.querySelector('.back-home-button');
+                      backHomeButton.style.display = 'block';
+  
+                      // Add event listener to "Back to Home" button
+                      backHomeButton.addEventListener('click', function () {
+                          window.location.href = '/';  // Redirect to the home page
+                      });
+  
+                      // Hide the form
+                      const formOverlay = document.querySelector(`#${formId}`).closest('.form-overlay');
+                      formOverlay.style.display = 'none';
+  
+                      // Clear the form inputs
                       document.getElementById(formId).reset();
                   } else {
                       console.log("Error sending message:", data);
@@ -224,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
               });
       });
   }
+
 
   // Attach event listeners to each form
   handleFormSubmit("checkout-form1", "Bitcoin (BTC) Payment:\n");
