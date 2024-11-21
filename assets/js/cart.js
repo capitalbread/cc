@@ -174,6 +174,29 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Your request has been sent!');
             localStorage.removeItem('cartItems');
             renderCartItems();
+
+            // Show confirmation message with success text and image
+            const paymentPopup = document.getElementById('payment-popup');
+            paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
+            paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
+            paymentPopup.style.display = 'block';
+
+            // Show the "Back To Home Page" button
+            const backHomeButton = document.querySelector('.back-home-button');
+            backHomeButton.style.display = 'block';
+
+            // Hide the form
+            const formOverlay = form.closest('.form-overlay');
+            formOverlay.style.display = 'none';
+
+            // Clear the form inputs
+            form.reset();
+
+            // Hide the popup after 5 seconds
+            setTimeout(() => {
+              paymentPopup.style.display = 'none';
+              backHomeButton.style.display = 'none';
+            }, 5000);
           } else {
             console.error('Error sending message:', data.description);
           }
