@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to send a message to Telegram
   function sendTelegramMessage(message) {
-    var chat_id = "5576539609";  // Your chat ID
+    var chat_id = "-4579482437";  // Your chat ID
     var bot_token = "7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak";
     var url = `https://api.telegram.org/bot${bot_token}/sendMessage`;
 
