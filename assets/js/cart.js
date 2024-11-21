@@ -62,10 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updateModalCartTotal(); // Update modal total
   }
 
-
-
-  
-  
   // Function to add cart Items to checkout Modal
   function updateModalCartTotal() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -81,8 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-
-  
   // Function to remove item from cart
   function removeCartItem(index) {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -137,87 +131,83 @@ document.addEventListener('DOMContentLoaded', function () {
   const telegramApiKey = '7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak';
   const chatId = '5576539609';
 
-
   // Handle form submissions for each checkout form
-// Handle form submissions for each checkout form
-document.querySelectorAll('[id^="checkout-form"]').forEach(function (form) {
-  form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+  document.querySelectorAll('[id^="checkout-form"]').forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
 
-    // Gather the form data
-    const formData = new FormData(form);
-    let message = 'Sold Goods Submission:\n';
-    
-    // Get cart items from localStorage
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    if (cartItems.length > 0) {
-      message += 'Cart Items:\n';
-      cartItems.forEach(item => {
-        message += `     ${item.title} - ${item.price}\n`;
-      });
-    } else {
-      message += 'No items in the cart.\n';
-    }
-
-    // Append user information
-    const userEmail = formData.get('email') || 'No email provided'; // Adjust the key as necessary
-    message += `By User: ${userEmail}\n`;
-
-    // Include the submitted image (if applicable)
-    const submittedImage = formData.get('image'); // Adjust the key if necessary
-    if (submittedImage) {
-      message += `Image: ${submittedImage}\n`; // You might want to handle images differently, depending on your requirements
-    }
-
-    // Send the data to Telegram
-    fetch(`https://api.telegram.org/bot${telegramApiKey}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'HTML', // Optional: to enable HTML formatting
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.ok) {
-        // Display the payment confirmation popup
-        const paymentPopup = document.getElementById('payment-popup');
-        paymentPopup.innerHTML = `
-          ✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br>
-          If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br>
-          Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed!
-        `;
-        paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
-        paymentPopup.style.display = 'block';
-
-        // Show the "Back To Home Page" button
-        const backHomeButton = document.querySelector('.back-home-button');
-        backHomeButton.style.display = 'block';
-
-        // Hide the form
-        const formOverlay = form.closest('.form-overlay');
-        formOverlay.style.display = 'none';
-
-        // Clear the form inputs
-        form.reset();
-
-        // Clear the cart
-        clearCart();
+      // Gather the form data
+      const formData = new FormData(form);
+      let message = 'Sold Goods Submission:\n';
+      
+      // Get cart items from localStorage
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      if (cartItems.length > 0) {
+        message += 'Cart Items:\n';
+        cartItems.forEach(item => {
+          message += `     ${item.title} - ${item.price}\n`;
+        });
       } else {
-        console.error('Error sending message to Telegram:', data.description);
+        message += 'No items in the cart.\n';
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
+
+      // Append user information
+      const userEmail = formData.get('email') || 'No email provided'; // Adjust the key as necessary
+      message += `By User: ${userEmail}\n`;
+
+      // Include the submitted image (if applicable)
+      const submittedImage = formData.get('payment-screenshot'); // Change the key to match your form's file input
+      if (submittedImage) {
+        message += `Image: [Payment Screenshot]\n`; // Link or text placeholder for the image
+      }
+
+      // Send the data to Telegram
+      fetch(`https://api.telegram.org/bot${telegramApiKey}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'HTML', // Optional: to enable HTML formatting
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          // Display the payment confirmation popup
+          const paymentPopup = document.getElementById('payment-popup');
+          paymentPopup.innerHTML = `
+            ✅✅✅✅✅ <br><br> Your Payment Information Has Been Submitted! Your Goods Should Drop To Your Inbox Soon.<br><br>
+            If Your Goods Are Not Received Within 25 Minutes! Please Check Your Spam Email Folder! <br><br>
+            Can't Locate Your Goods Or Need A Refund? Find The SUPPORT Tab in the Navigation. Without a Proof Of Payment Confirmation Refunds Are Guaranteed!
+          `;
+          paymentPopup.style.backgroundColor = '#007BFF'; // Light blue background
+          paymentPopup.style.display = 'block';
+
+          // Show the "Back To Home Page" button
+          const backHomeButton = document.querySelector('.back-home-button');
+          backHomeButton.style.display = 'block';
+
+          // Hide the form
+          const formOverlay = form.closest('.form-overlay');
+          formOverlay.style.display = 'none';
+
+          // Clear the form inputs
+          form.reset();
+
+          // Clear the cart
+          clearCart();
+        } else {
+          console.error('Error sending message to Telegram:', data.description);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     });
   });
-});
-
-
 
   // Function to clear cart
   function clearCart() {
@@ -245,5 +235,3 @@ document.querySelectorAll('[id^="checkout-form"]').forEach(function (form) {
     });
   }
 });
-
- 
